@@ -2,7 +2,6 @@ PRAGMA foreign_keys=OFF;
 BEGIN TRANSACTION;
 DROP TABLE IF EXISTS `user`;
 DROP TABLE IF EXISTS `todo`;
-DROP TABLE IF EXISTS `pwresets`;
 
 CREATE TABLE `user` (
   -- Note that storing passwords in plaintext like this is very, very bad.
@@ -11,7 +10,8 @@ CREATE TABLE `user` (
   email TEXT UNIQUE NOT NULL,
   password TEXT NOT NULL,
   firstName TEXT NOT NULL,
-  lastName TEXT NOT NULL
+  lastName TEXT NOT NULL,
+  token TEXT
 );
 
 -- passwords:
@@ -49,12 +49,6 @@ INSERT INTO "todo" VALUES('Kill my father.',1,21,3);
 INSERT INTO "todo" VALUES('Run away to find Danerys Targarian.',1,22,3);
 INSERT INTO "todo" VALUES('Betray my best friend',0,23,3);
 INSERT INTO "todo" VALUES('Suggest a new king.',0,24,3);
-
-CREATE TABLE `pwresets` (
-  token VARCHAR(50) NOT NULL,
-  id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-  user_id INTEGER NOT NULL REFERENCES user(id) ON DELETE CASCADE
-);
 
 DELETE FROM sqlite_sequence;
 INSERT INTO "sqlite_sequence" VALUES('todo',24);

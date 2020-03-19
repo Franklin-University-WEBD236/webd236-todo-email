@@ -2,7 +2,7 @@
 
 class UserModel extends Model {
 
-  private static $fieldNames = array('email', 'password', 'firstName', 'lastName');
+  private static $fieldNames = array('email', 'password', 'firstName', 'lastName', 'token');
 
   public function __construct($fields = null) {
     parent::__construct($fields);
@@ -64,6 +64,9 @@ class UserModel extends Model {
     $st -> bindParam(':firstName', $this->firstName);
     $st -> bindParam(':lastName', $this->lastName);
     $st -> bindParam(':id', $this->id);
+    if (isset($this->token)) {
+      $st -> bindParam(':token', )
+    }
     $st -> execute();
   }
 }

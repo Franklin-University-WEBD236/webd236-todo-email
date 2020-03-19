@@ -226,7 +226,7 @@ class UserController extends Controller {
       // send the email here
     
     $token = getRandomToken(50);
-    $link = $this->view->url("user/password_token") . "/" . $token;
+    $link = "https://" . $_SERVER['SERVER_NAME'] . $this->view->url("user/password_token") . "/" . $token;
     $message = $this->view->renderTemplate(
       "views/user_reset_password_email.php",
       array(
@@ -236,7 +236,7 @@ class UserController extends Controller {
     );
     
     $emailService = new Email();
-    $emailService->send($email, "Password reset request",$message);
+    $emailService->send($email, "Password reset request", $message);
 
 
     //}
@@ -251,6 +251,10 @@ class UserController extends Controller {
         'secret' => getenv("SECRET")
       )
     );
+  }
+  
+  public function get_password_token() {
+    
   }
 
 }
