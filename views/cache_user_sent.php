@@ -94,7 +94,7 @@
   <div class="col-lg-12">
     <p>An email was sent to the address provided. Please check your
     email and click on the provided link in order to reset your password.</p>
-    <p>Secret is <?php echo(secret); ?>
+    <p>Secret is <?php echo($secret); ?>
   </div>
 </div>
 

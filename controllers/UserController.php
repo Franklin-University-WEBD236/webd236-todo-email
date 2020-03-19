@@ -221,10 +221,37 @@ class UserController extends Controller {
     $email = safeParam($form, 'email');
 
     $user = $this->model::findByEmail($email);
-    if ($user) {
+    //if ($user) {
       // send the email here
-    }
-    $this->view->redirectRelative('user/sent');
+
+      $curl = curl_init();
+
+      curl_setopt_array($curl, array(
+        CURLOPT_URL => "https://api.sendinblue.com/v3/account",
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => "",
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 30,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => "GET",
+        CURLOPT_HTTPHEADER => array(
+          "accept: application/json"
+        ),
+      ));
+
+      $response = curl_exec($curl);
+      $err = curl_error($curl);
+
+      curl_close($curl);
+
+      if ($err) {
+        die("cURL Error #:" . $err);
+      } else {
+        die($response);
+      }
+
+    //}
+    //$this->view->redirectRelative('user/sent');
   }
   
   public function get_sent() {
@@ -232,7 +259,7 @@ class UserController extends Controller {
       "views/user_sent.php",
       array(
         'title' => 'Password reset',
-        'secret' => $_ENV["SECRET"]
+        'secret' => getenv("SECRET")
       )
     );
   }
