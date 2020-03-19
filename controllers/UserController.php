@@ -236,7 +236,7 @@ class UserController extends Controller {
         CURLOPT_CUSTOMREQUEST => "GET",
         CURLOPT_HTTPHEADER => array(
           "accept: application/json",
-          "" . getenv("EMAIL_API_KEY")
+          "api-key: " . getenv("EMAIL_API_KEY")
         ),
       ));
 
