@@ -85,8 +85,7 @@ PARAMS;
 
     if ($err) {
       die("cURL Error #:" . $err);
-    } else {
-      die($response . $params);
-    }
+    } 
+    return $response;
   }
 }
