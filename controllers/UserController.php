@@ -224,8 +224,17 @@ class UserController extends Controller {
     if ($user) {
       // send the email here
     }
-    $this->view->flash("Login successful!");
-    $this->view->redirectRelative(index);
+    $this->view->redirectRelative('user/sent');
+  }
+  
+  public function get_sent() {
+    $this->view->renderTemplate(
+      "views/user_sent.php",
+      array(
+        'title' => 'Password reset',
+        'secret' => $_ENV["SECRET"]
+      )
+    );
   }
 
 }
