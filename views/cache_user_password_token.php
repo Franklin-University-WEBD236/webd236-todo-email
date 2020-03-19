@@ -94,7 +94,7 @@
   <div class="col-lg-12">
 
     <p><?php echo($token); ?></p>
-    <form action="/user/password_token/<?php echo($id); ?>" method="post">
+    <form action="/user/password_token/<?php echo($token); ?>" method="post">
       <div class="form-group">
         <div class="row mt-4">
           <div class="col">

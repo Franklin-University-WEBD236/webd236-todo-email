@@ -248,7 +248,6 @@ class UserController extends Controller {
       "views/user_sent.php",
       array(
         'title' => 'Password reset',
-        'secret' => getenv("SECRET")
       )
     );
   }
@@ -264,13 +263,34 @@ class UserController extends Controller {
   }
 
   public function post_password_token($token) {
-    $this->view->renderTemplate(
-      "views/user_password_token.php",
-      array(
-        'title' => 'Password reset',
-        'token' => $token
-      )
-    );
+    $form = safeParam($_POST, 'form');
+
+    $user = $this->model::findUserByToken($token);
+    if (!$user) {
+      die("No user with that token found");
+    }
+    
+    $validator = new Validator();
+    $validator->password('newPassword1', safeParam($form, 'newPassword1'), "Password must have at least 8 characters, a number, an uppercase, and a symbol.");
+    $validator->same('newPassword2', safeParam($form, 'newPassword1'), safeParam($form, 'newPassword2'), "Passwords must match.");
+    if (!$validator->hasErrors()) {
+      $user->password = password_hash(safeParam($form, 'newPassword1'), PASSWORD_DEFAULT);
+      $user->token = null;
+      $user->update();
+      login($user);
+      $this->view->flash("Password updated");
+      $this->view->redirectRelative("");
+    } else {
+      $this->view->renderTemplate(
+        "views/user_password_token.php",
+        array(
+          'title' => 'Password reset',
+          'token' => $token,
+          'form' => $form,
+          'errors' => $validator->allErrors(),
+        )
+      );
+    }
   }
 
 }
