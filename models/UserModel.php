@@ -72,7 +72,7 @@ class UserModel extends Model {
     $st -> bindParam(':lastName', $this->lastName);
     $st -> bindParam(':id', $this->id);
     if (!isset($this->token)) {
-      $this->token = "NULL";
+      $this->token = null;
     }
     $st -> bindParam(':token', $this->token);
     $st -> execute();
