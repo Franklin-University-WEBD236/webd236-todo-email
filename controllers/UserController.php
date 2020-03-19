@@ -206,5 +206,27 @@ class UserController extends Controller {
       );
     }
   }
+  
+  public function get_reset() {
+    $this->view->renderTemplate(
+      "views/user_reset.php",
+      array(
+        'title' => 'Password reset',
+      )
+    );
+  }
+
+  public function post_reset() {
+    $form = safeParam($_POST, 'form');
+    $email = safeParam($form, 'email');
+
+    $user = $this->model::findByEmail($email);
+    if ($user) {
+      // send the email here
+    }
+    $this->view->flash("Login successful!");
+    $this->view->redirectRelative(index);
+  }
+
 }
 ?>
