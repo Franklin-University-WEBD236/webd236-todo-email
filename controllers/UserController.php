@@ -207,9 +207,9 @@ class UserController extends Controller {
     }
   }
   
-  public function get_reset() {
+  public function get_reset_password() {
     $this->view->renderTemplate(
-      "views/user_reset.php",
+      "views/user_reset_password.php",
       array(
         'title' => 'Password reset',
       )
@@ -217,24 +217,25 @@ class UserController extends Controller {
   }
 
   
-  public function post_reset() {
+  public function post_reset_password() {
     $form = safeParam($_POST, 'form');
     $email = safeParam($form, 'email');
 
     $user = $this->model::findByEmail($email);
-    
-    $link = "https://${_SERVER['SERVER_NAME']}/user/changepw/" . getRandomToken(50);
-    
-    $emailService = new Email();
     //if ($user) {
       // send the email here
+    
+    $token = getRandomToken(50);
+    $link = $this->view->url("user/password_token") . "/" . $token;
     $message = $this->view->renderTemplate(
-      "views/password_reset_email.php",
+      "views/user_reset_password_email.php",
       array(
         'url' => $link
       ),
       true
     );
+    
+    $emailService = new Email();
     $emailService->send($email, "Password reset request",$message);
 
 

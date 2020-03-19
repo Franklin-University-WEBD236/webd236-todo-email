@@ -18,7 +18,7 @@
       </div>
     </form>
     <p>New here? You can <a href="@@user/register@@">create an account</a>.</p>
-    <p>Forgot your password? You can <a href="@@user/reset@@">reset your password</a>.</p>
+    <p>Forgot your password? You can <a href="@@user/reset_password@@">reset your password</a>.</p>
   </div>
 </div>
 

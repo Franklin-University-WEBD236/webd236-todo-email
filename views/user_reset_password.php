@@ -4,7 +4,7 @@
   <div class="col-lg-12">
     <p>Enter your email address and we will mail you a link you can use to reset your
     password.</p>
-    <form action="@@user/reset@@" method="post">
+    <form action="@@user/reset_password@@" method="post">
       <div class="form-group">
         <label for="email">Email address</label>
         <input type="text" min="1" id="email" name="form[email]" class="form-control" placeholder="Enter email address" value="{{value($form['email'])}}" />
