@@ -221,9 +221,10 @@ class UserController extends Controller {
     $email = safeParam($form, 'email');
 
     $user = $this->model::findByEmail($email);
+    $email = new Email();
     //if ($user) {
       // send the email here
-
+    $email->send("","","");
 
 
     //}
