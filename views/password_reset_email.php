@@ -5,6 +5,6 @@
     <p><a href="{{$url}}">{{$url}}</a></p>
     <p>For your protection, this URL will expire 60 minutes after it is generated. Please do
       not reply to this message. If you have received this message in error, please contact
-      <a href="mailto:support@{{getenv('PROJECT_DOMAIN').'.glitch.me'}}">support@{{getenv('PROJECT_DOMAIN').'.glitch.me'}}</a>.</p>
+      <a href="mailto:support@{{$_SERVER['SERVER_NAME']}}">support@{$_SERVER['SERVER_NAME']}}</a>.</p>
   </body>
 </html>

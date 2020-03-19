@@ -216,18 +216,22 @@ class UserController extends Controller {
     );
   }
 
+  
   public function post_reset() {
     $form = safeParam($_POST, 'form');
     $email = safeParam($form, 'email');
 
     $user = $this->model::findByEmail($email);
+    
+    $link = "https://${_SERVER['SERVER_NAME']}/user/changepw/" . getRandomToken(50);
+    
     $emailService = new Email();
     //if ($user) {
       // send the email here
     $message = $this->view->renderTemplate(
       "views/password_reset_email.php",
       array(
-        'url' => 'https://foo.bar.com/'
+        'url' => $link
       ),
       true
     );
