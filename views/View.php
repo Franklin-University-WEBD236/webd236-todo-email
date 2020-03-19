@@ -57,7 +57,7 @@ class View {
     return implode('/', $cachePath);
   }
 
-  public function renderTemplate($view, $params) {
+  public function renderTemplate($view, $params=array(), $asString=false) {
     $useCache = false;
 
     if (!file_exists($view)) {
@@ -86,7 +86,17 @@ class View {
       file_put_contents($cacheName, $contents);
     }
     extract($params);
-    include($cacheName);
+    
+    ob_start();
+    eval("?>" . $contents);
+    $result = ob_get_contents();
+    ob_end_clean();
+    
+    if (!$asString) {
+      echo $result;
+    }
+    return $result;
+    //include($cacheName);
   }
 
   function checked(&$something, $compare) {
