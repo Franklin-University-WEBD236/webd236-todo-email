@@ -30,7 +30,7 @@ class Email {
     }    
   }
   
-  public function send($recipientEmail, $subject, $message) {
+  public function send($recipientEmail, $subject, $message, $simulate=true) {
 
     $senderEmail = "noreply@" . getenv('PROJECT_DOMAIN') . ".glitch.me";
     $senderName = ucwords(getenv('PROJECT_DOMAIN'), "- ") . " System";
@@ -54,7 +54,11 @@ class Email {
       }
     }
 PARAMS;
-    die("<pre>" . $params . "</pre>");
+    if ($simulate) {
+      echo $message;
+      die();
+    }
+
     $curl = curl_init();
     
     curl_setopt_array($curl, array(
@@ -68,7 +72,8 @@ PARAMS;
       CURLOPT_POSTFIELDS => $params,
       CURLOPT_HTTPHEADER => array(
         "accept: application/json",
-        "content-type: application/json"
+        "content-type: application/json",
+        "api-key: " . getenv("EMAIL_API_KEY")
       ),
     ));
 
@@ -78,9 +83,9 @@ PARAMS;
     curl_close($curl);
 
     if ($err) {
-      echo "cURL Error #:" . $err;
+      die("cURL Error #:" . $err);
     } else {
-      echo $response;
+      die($response . $params);
     }
   }
 }

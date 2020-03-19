@@ -238,9 +238,10 @@ class UserController extends Controller {
       );
 
       $emailService = new Email();
-      $emailService->send($email, "Password reset request", $message);
+      //$emailService->test();
+      $emailService->send($email, "Password reset request", $message, false);
     }
-    //$this->view->redirectRelative('user/sent');
+    $this->view->redirectRelative('user/sent');
   }
   
   public function get_sent() {
