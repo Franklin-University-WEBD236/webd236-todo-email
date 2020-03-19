@@ -224,7 +224,8 @@ class UserController extends Controller {
     $email = new Email();
     //if ($user) {
       // send the email here
-    $email->send("","","");
+    
+    $email->send("todd.whittaker@franklin.edu","Password reset request","<p>This is the message</p>");
 
 
     //}
