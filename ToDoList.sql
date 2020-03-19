@@ -19,10 +19,10 @@ CREATE TABLE `user` (
 --  Theon: !r0nBorn
 --  Tyrion: th3Imp?!
 --  Todd: N1ceP@ssword
-INSERT INTO "user" VALUES(1,'nobody@nowhere.com','$2y$10$uKHrSOviTMvN9vbGNLsvzOzk1aRNqwFmMkobUfd5IMNRymr7U0lBm','Arya','Stark');
-INSERT INTO "user" VALUES(2,'ironborn@pyke.com','$2y$10$eulmGacwa6TjIOPHWC4an.i8o1cgcdBAiMBUyrNXQ7kHeBgJ79tl.','Theon','Greyjoy');
-INSERT INTO "user" VALUES(3,'alwayspayshisdebts@casterlyrock.com','$2y$10$GNup.tzD3/kTYX3SN1g.neHtKQ295arZXGoelfo3Tk5ONyi05BM7m','Tyrion','Lannister');
-INSERT INTO "user" VALUES(4,'todd.whittaker@franklin.edu','$2y$10$roDY2iVzz3gj0HDl1H1FvuE7tedwoE67p.0CMziZi7QsHC5NVL.8G','Todd','Whittaker');
+INSERT INTO "user" VALUES(1,'nobody@nowhere.com','$2y$10$uKHrSOviTMvN9vbGNLsvzOzk1aRNqwFmMkobUfd5IMNRymr7U0lBm','Arya','Stark',null);
+INSERT INTO "user" VALUES(2,'ironborn@pyke.com','$2y$10$eulmGacwa6TjIOPHWC4an.i8o1cgcdBAiMBUyrNXQ7kHeBgJ79tl.','Theon','Greyjoy',null);
+INSERT INTO "user" VALUES(3,'alwayspayshisdebts@casterlyrock.com','$2y$10$GNup.tzD3/kTYX3SN1g.neHtKQ295arZXGoelfo3Tk5ONyi05BM7m','Tyrion','Lannister',null);
+INSERT INTO "user" VALUES(4,'todd.whittaker@franklin.edu','$2y$10$roDY2iVzz3gj0HDl1H1FvuE7tedwoE67p.0CMziZi7QsHC5NVL.8G','Todd','Whittaker',null);
 
 CREATE TABLE `todo` (
   description VARCHAR(50) NOT NULL,

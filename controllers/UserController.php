@@ -222,24 +222,22 @@ class UserController extends Controller {
     $email = safeParam($form, 'email');
 
     $user = $this->model::findByEmail($email);
-    //if ($user) {
+    if ($user) {
       // send the email here
     
-    $token = getRandomToken(50);
-    $link = "https://" . $_SERVER['SERVER_NAME'] . $this->view->url("user/password_token") . "/" . $token;
-    $message = $this->view->renderTemplate(
-      "views/user_reset_password_email.php",
-      array(
-        'url' => $link
-      ),
-      true
-    );
-    
-    $emailService = new Email();
-    $emailService->send($email, "Password reset request", $message);
+      $token = getRandomToken(50);
+      $link = "https://" . $_SERVER['SERVER_NAME'] . $this->view->url("user/password_token") . "/" . $token;
+      $message = $this->view->renderTemplate(
+        "views/user_reset_password_email.php",
+        array(
+          'url' => $link
+        ),
+        true
+      );
 
-
-    //}
+      $emailService = new Email();
+      $emailService->send($email, "Password reset request", $message);
+    }
     //$this->view->redirectRelative('user/sent');
   }
   

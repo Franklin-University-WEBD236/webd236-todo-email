@@ -30,6 +30,13 @@ class UserModel extends Model {
     return self::makeUserFromRow($st -> fetch(PDO::FETCH_ASSOC));
   }
 
+   public static function findUserByToken($token) {
+    $st = self::$db -> prepare('SELECT * FROM user WHERE token = ?');
+    $st -> bindParam(1, $token);
+    $st -> execute();
+    return self::makeUserFromRow($st -> fetch(PDO::FETCH_ASSOC));
+  }
+
   public static function findByEmail($email) {
     $st = self::$db -> prepare('SELECT * FROM user WHERE email = :email');
     $st -> bindParam(':email', $email);
@@ -58,15 +65,16 @@ class UserModel extends Model {
   }
 */
   public function update() {
-    $st = self::$db -> prepare("UPDATE user SET email = :email, password = :password, firstName = :firstName, lastName = :lastName WHERE id = :id");
+    $st = self::$db -> prepare("UPDATE user SET email = :email, password = :password, firstName = :firstName, lastName = :lastName, token = :token WHERE id = :id");
     $st -> bindParam(':email', $this->email);
     $st -> bindParam(':password', $this->password);
     $st -> bindParam(':firstName', $this->firstName);
     $st -> bindParam(':lastName', $this->lastName);
     $st -> bindParam(':id', $this->id);
-    if (isset($this->token)) {
-      $st -> bindParam(':token', )
+    if (!isset($this->token)) {
+      $this->token = "NULL";
     }
+    $st -> bindParam(':token', $this->token);
     $st -> execute();
   }
 }
