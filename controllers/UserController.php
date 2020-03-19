@@ -224,8 +224,10 @@ class UserController extends Controller {
     $user = $this->model::findByEmail($email);
     if ($user) {
       // send the email here
-    
       $token = getRandomToken(50);
+      $user->token = $token;
+      $user->update();
+      
       $link = "https://" . $_SERVER['SERVER_NAME'] . $this->view->url("user/password_token") . "/" . $token;
       $message = $this->view->renderTemplate(
         "views/user_reset_password_email.php",
@@ -251,8 +253,24 @@ class UserController extends Controller {
     );
   }
   
-  public function get_password_token() {
-    
+  public function get_password_token($token) {
+    $this->view->renderTemplate(
+      "views/user_password_token.php",
+      array(
+        'title' => 'Password reset',
+        'token' => $token
+      )
+    );
+  }
+
+  public function post_password_token($token) {
+    $this->view->renderTemplate(
+      "views/user_password_token.php",
+      array(
+        'title' => 'Password reset',
+        'token' => $token
+      )
+    );
   }
 
 }
