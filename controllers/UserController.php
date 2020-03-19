@@ -221,11 +221,17 @@ class UserController extends Controller {
     $email = safeParam($form, 'email');
 
     $user = $this->model::findByEmail($email);
-    $email = new Email();
+    $emailService = new Email();
     //if ($user) {
       // send the email here
-    
-    $email->send("todd.whittaker@franklin.edu","Password reset request","<p>This is the message</p>");
+    $message = $this->view->renderTemplate(
+      "views/password_reset_email.php",
+      array(
+        'url' => 'https://foo.bar.com/'
+      ),
+      true
+    );
+    $emailService->send($email, "Password reset request",$message);
 
 
     //}
