@@ -34,7 +34,8 @@ class Email {
 
     $senderEmail = "noreply@" . getenv('PROJECT_DOMAIN') . ".glitch.me";
     $senderName = ucwords(getenv('PROJECT_DOMAIN'), "- ") . " System";
-
+    $message = addslashes($message);
+    
     $params = <<<PARAMS
     {
       "sender":{
@@ -50,7 +51,7 @@ class Email {
       "subject":"$subject",
       "replyTo":{
         "name":"$senderName",
-        "email":"$senderEmail",
+        "email":"$senderEmail"
       }
     }
 PARAMS;
