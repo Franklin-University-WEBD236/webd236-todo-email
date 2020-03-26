@@ -16,6 +16,7 @@
         <button type="submit" class="btn btn-primary">Submit</button>
         <button class="btn btn-secondary" onclick="return get('@@index@@')">Cancel</button>
       </div>
+      <!-- stuff skipped -->
     </form>
     <p>New here? You can <a href="@@user/register@@">create an account</a>.</p>
     <p>Forgot your password? You can <a href="@@user/reset_password@@">reset your password</a>.</p>
