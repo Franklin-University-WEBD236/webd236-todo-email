@@ -53,7 +53,7 @@ class Email {
       )
     );
     
-    $paramsJSON = json_encode($params, JSON_HEX_QUOT | JSON_HEX_TAG);
+    $paramsJSON = json_encode($params, JSON_HEX_QUOT | JSON_HEX_TAG | JSON_UNESCAPED_SLASHES);
 /*    
     $params = <<<PARAMS
     {
@@ -106,6 +106,7 @@ PARAMS;
     if ($err) {
       die("cURL Error #:" . $err);
     }
+    Logger::instance()->debug($paramsJSON);
     Logger::instance()->debug($response);
     return $response;
   }

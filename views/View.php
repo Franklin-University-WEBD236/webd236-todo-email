@@ -75,8 +75,10 @@ class View {
       $contents = preg_replace_callback('/@@\s*(.*)\s*@@/U', array($this, '__resolveRelativeUrls'), $contents);
 
       $patterns = array(
-        array('src' => '/{{/', 'dst' => '<?php echo('),
-        array('src' => '/}}/', 'dst' => '); ?>'),
+        array('src' => '/{{{/', 'dst' => '<?php echo('),
+        array('src' => '/}}}/', 'dst' => '); ?>'),
+        array('src' => '/{{/', 'dst' => '<?php echo(htmlentities('),
+        array('src' => '/}}/', 'dst' => ')); ?>'),
         array('src' => '/\[\[/', 'dst' => '<?php '),
         array('src' => '/\]\]/', 'dst' => '?>')
       );
