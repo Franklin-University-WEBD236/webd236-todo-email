@@ -76,7 +76,7 @@ class Email {
 PARAMS;
 */
     if ($simulate) {
-      echo "<pre>" . $params . "</pre>";
+      echo $message;
       die();
     }
 
@@ -105,7 +105,8 @@ PARAMS;
 
     if ($err) {
       die("cURL Error #:" . $err);
-    } 
+    }
+    Logger::instance()->debug($response);
     return $response;
   }
 }
