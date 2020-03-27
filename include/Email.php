@@ -35,7 +35,12 @@ class Email {
     $senderEmail = "noreply@" . getenv('PROJECT_DOMAIN') . ".glitch.me";
     $senderName = ucwords(getenv('PROJECT_DOMAIN'), "- ") . " System";
     $message = $simulate ? $message : addslashes($message); // need for JSON
-    
+    $params = json_encode(
+      array(
+        
+      )
+    );
+/*    
     $params = <<<PARAMS
     {
       "sender":{
@@ -55,8 +60,9 @@ class Email {
       }
     }
 PARAMS;
+*/
     if ($simulate) {
-      echo $message;
+      echo "<pre>" . htmlentities($params) . "</pre>";
       die();
     }
 
