@@ -24,7 +24,7 @@ class Email {
   }
   
   public function accountTest() {
-    $curl = makeCurl("https://api.sendinblue.com/v3/account", "GET");
+    $curl = $this->makeCurl("https://api.sendinblue.com/v3/account", "GET");
 
     $response = curl_exec($curl);
     $err = curl_error($curl);
@@ -67,7 +67,7 @@ class Email {
       die();
     }
 
-    $curl = makeCurl("https://api.sendinblue.com/v3/smtp/email", "POST");
+    $curl = $this->makeCurl("https://api.sendinblue.com/v3/smtp/email", "POST");
     curl_setopt($curl, CURLOPT_POSTFIELDS, $paramsJSON);
 
     $response = curl_exec($curl);
