@@ -37,7 +37,21 @@ class Email {
     $message = $simulate ? $message : addslashes($message); // need for JSON
     $params = json_encode(
       array(
-        
+        "sender" => array(
+          "name" => "${senderName}",
+          "email" => "${senderEmail}"
+        ),
+        "to" => array(
+          array(
+            "email" => "${recipientEmail}"
+          )
+        ),
+        "htmlContent" => "${message}",
+        "subject" => "${subject}",
+        "replyTo" => array(
+          "name" => "${senderName}",
+          "email" => "${senderEmail}"
+        )
       )
     );
 /*    
