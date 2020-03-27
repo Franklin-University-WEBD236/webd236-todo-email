@@ -3,7 +3,6 @@
 <div class="row">
   <div class="col-lg-12">
 
-    <p>{{$token}}</p>
     <form action="@@user/password_token/{{$token}}@@" method="post">
       <div class="form-group">
         <div class="row mt-4">
