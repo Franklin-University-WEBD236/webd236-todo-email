@@ -76,7 +76,7 @@ class Email {
 PARAMS;
 */
     if ($simulate) {
-      echo "<pre>" . htmlentities($params) . "</pre>";
+      echo "<pre>" . $params . "</pre>";
       die();
     }
 
