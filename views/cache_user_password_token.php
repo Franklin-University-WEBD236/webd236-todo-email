@@ -93,7 +93,6 @@
 <div class="row">
   <div class="col-lg-12">
 
-    <p><?php echo(htmlentities($token)); ?></p>
     <form action="/user/password_token/<?php echo(htmlentities($token)); ?>" method="post">
       <div class="form-group">
         <div class="row mt-4">
