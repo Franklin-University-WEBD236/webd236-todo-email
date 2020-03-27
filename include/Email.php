@@ -35,25 +35,25 @@ class Email {
     $senderEmail = "noreply@" . getenv('PROJECT_DOMAIN') . ".glitch.me";
     $senderName = ucwords(getenv('PROJECT_DOMAIN'), "- ") . " System";
     $message = $simulate ? $message : addslashes($message); // need for JSON
-    $params = json_encode(
-      array(
-        "sender" => array(
-          "name" => "${senderName}",
-          "email" => "${senderEmail}"
-        ),
-        "to" => array(
-          array(
-            "email" => "${recipientEmail}"
-          )
-        ),
-        "htmlContent" => "${message}",
-        "subject" => "${subject}",
-        "replyTo" => array(
-          "name" => "${senderName}",
-          "email" => "${senderEmail}"
+    $params = array(
+      "sender" => array(
+        "name" => "${senderName}",
+        "email" => "${senderEmail}"
+      ),
+      "to" => array(
+        array(
+          "email" => "${recipientEmail}"
         )
+      ),
+      "htmlContent" => "${message}",
+      "subject" => "${subject}",
+      "replyTo" => array(
+        "name" => "${senderName}",
+        "email" => "${senderEmail}"
       )
     );
+    
+    $paramsJSON = json_encode($params, JSON_HEX_QUOT | JSON_HEX_TAG);
 /*    
     $params = <<<PARAMS
     {
@@ -90,7 +90,7 @@ PARAMS;
       CURLOPT_TIMEOUT => 30,
       CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
       CURLOPT_CUSTOMREQUEST => "POST",
-      CURLOPT_POSTFIELDS => $params,
+      CURLOPT_POSTFIELDS => $paramsJSON,
       CURLOPT_HTTPHEADER => array(
         "accept: application/json",
         "content-type: application/json",
