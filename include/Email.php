@@ -34,7 +34,6 @@ class Email {
 
     $senderEmail = "noreply@" . getenv('PROJECT_DOMAIN') . ".glitch.me";
     $senderName = ucwords(getenv('PROJECT_DOMAIN'), "- ") . " System";
-    $message = $simulate ? $message : addslashes($message); // need for JSON
     $params = array(
       "sender" => array(
         "name" => "${senderName}",
@@ -54,27 +53,7 @@ class Email {
     );
     
     $paramsJSON = json_encode($params, JSON_HEX_QUOT | JSON_HEX_TAG | JSON_UNESCAPED_SLASHES);
-/*    
-    $params = <<<PARAMS
-    {
-      "sender":{
-        "name":"$senderName",
-        "email":"$senderEmail"
-      },
-      "to":[
-        {
-          "email":"$recipientEmail"
-        }
-      ],
-      "htmlContent":"$message",
-      "subject":"$subject",
-      "replyTo":{
-        "name":"$senderName",
-        "email":"$senderEmail"
-      }
-    }
-PARAMS;
-*/
+
     if ($simulate) {
       echo $message;
       die();
