@@ -1,22 +1,30 @@
 <?php
 class Email {
   
-  public function accountTest() {
+  public function __construct() {
+  }
+  
+  private function makeCurl($endpoint, $method) {
     $curl = curl_init();
-
     curl_setopt_array($curl, array(
-      CURLOPT_URL => "https://api.sendinblue.com/v3/account",
+      CURLOPT_URL => $endpoint,
       CURLOPT_RETURNTRANSFER => true,
       CURLOPT_ENCODING => "",
       CURLOPT_MAXREDIRS => 10,
       CURLOPT_TIMEOUT => 30,
       CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-      CURLOPT_CUSTOMREQUEST => "GET",
+      CURLOPT_CUSTOMREQUEST => $method,
       CURLOPT_HTTPHEADER => array(
+        "content-type: application/json",
         "accept: application/json",
         "api-key: " . getenv("EMAIL_API_KEY")
       ),
     ));
+    return $curl;
+  }
+  
+  public function accountTest() {
+    $curl = makeCurl("https://api.sendinblue.com/v3/account", "GET");
 
     $response = curl_exec($curl);
     $err = curl_error($curl);
@@ -59,23 +67,8 @@ class Email {
       die();
     }
 
-    $curl = curl_init();
-    
-    curl_setopt_array($curl, array(
-      CURLOPT_URL => "https://api.sendinblue.com/v3/smtp/email",
-      CURLOPT_RETURNTRANSFER => true,
-      CURLOPT_ENCODING => "",
-      CURLOPT_MAXREDIRS => 10,
-      CURLOPT_TIMEOUT => 30,
-      CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-      CURLOPT_CUSTOMREQUEST => "POST",
-      CURLOPT_POSTFIELDS => $paramsJSON,
-      CURLOPT_HTTPHEADER => array(
-        "accept: application/json",
-        "content-type: application/json",
-        "api-key: " . getenv("EMAIL_API_KEY")
-      ),
-    ));
+    $curl = makeCurl("https://api.sendinblue.com/v3/smtp/email", "POST");
+    curl_setopt($curl, CURLOPT_POSTFIELDS, $paramsJSON);
 
     $response = curl_exec($curl);
     $err = curl_error($curl);
