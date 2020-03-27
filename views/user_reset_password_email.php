@@ -2,7 +2,7 @@
   <body>
     <p>A request was received by {{$_SERVER['SERVER_NAME']}} to reset
       the password associated with this address.</p>
-    <p>To reset the password, click the URL below or paste it into a
+    <p>To reset the password, click <a href=the URL below or paste it into a
       web browser.</p>
     <p><a href="{{$url}}">{{$url}}</a></p>
     <p>For your protection, this URL will expire 60 minutes after it
