@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><?php echo($title); ?></title>
+    <title><?php echo(htmlentities($title)); ?></title>
     <link rel="shortcut icon" href="https://cdn.glitch.com/7635e9c3-2015-4ec8-967a-16ca37cc9e55%2Ffavicon.ico" />
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -22,7 +22,7 @@
             <a class="nav-link" href="/about">About</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="https://glitch.com/edit/#!/remix/<?php echo(getenv('PROJECT_DOMAIN')); ?>">Remix</a>
+            <a class="nav-link" href="https://glitch.com/edit/#!/remix/<?php echo(htmlentities(getenv('PROJECT_DOMAIN'))); ?>">Remix</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" onclick="post('/reset');" style="cursor:pointer">Reset DB</a>
@@ -32,11 +32,11 @@
 <?php  if (isLoggedIn()): ?>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown">
-              <span class="material-icons" style="vertical-align:bottom">account_circle</span> <?php echo($_SESSION['user']['firstName']); ?> <?php echo($_SESSION['user']['lastName']); ?>
+              <span class="material-icons" style="vertical-align:bottom">account_circle</span> <?php echo(htmlentities($_SESSION['user']['firstName'])); ?> <?php echo(htmlentities($_SESSION['user']['lastName'])); ?>
             </a>
             <div class="dropdown-menu dropdown-menu-right">
-              <a class="dropdown-item" href="/user/edit/<?php echo($_SESSION['user']->id); ?>">Edit profile</a>
-              <a class="dropdown-item" href="/user/password/<?php echo($_SESSION['user']->id); ?>">Change password</a>
+              <a class="dropdown-item" href="/user/edit/<?php echo(htmlentities($_SESSION['user']->id)); ?>">Edit profile</a>
+              <a class="dropdown-item" href="/user/password/<?php echo(htmlentities($_SESSION['user']->id)); ?>">Change password</a>
               <a class="dropdown-item" href="/user/logout">Logout</a>
             </div>
           </li>
@@ -50,7 +50,7 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-12">
-          <h1 class="display-4"><?php echo($title); ?></h1>
+          <h1 class="display-4"><?php echo(htmlentities($title)); ?></h1>
           <p class="lead">Keep track of things that you need to do.</p>
           <p><em>Author: <a href="https://www.franklin.edu/about-us/faculty-staff/faculty-profiles/whittakt">Todd Whittaker</a></em></p>
           <hr>
@@ -64,7 +64,7 @@
       Please fix the following errors:
       <ul class="mb-0">
 <?php  foreach ($errors as $error): ?>
-        <li><?php echo($error); ?></li>
+        <li><?php echo(htmlentities($error)); ?></li>
 <?php  endforeach; ?>
       </ul>
     </div>
@@ -74,7 +74,7 @@
       
 <?php  if (isset($_SESSION['flash'])): ?>
 <div class="alert alert-success alert-dismissible flash-message" role="alert" id="flash">
-  <?php echo($_SESSION['flash']); ?>
+  <?php echo(htmlentities($_SESSION['flash'])); ?>
   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
     <span aria-hidden="true">&times;</span>
   </button>
@@ -93,11 +93,11 @@
 <div class="row">
   <div class="col-lg-12">
 
-    <form action="/todo/edit/<?php echo($todo['id']); ?>" method="post">
+    <form action="/todo/edit/<?php echo(htmlentities($todo['id'])); ?>" method="post">
       <div class="form-group">
         <label for="description">Make your changes below</label>
-        <input type="text" min="1" id="description" name="form[description]" class="form-control" placeholder="Enter description" value="<?php echo($todo['description']); ?>" />
-        <input type="hidden" id="done" name="form[done]" value="<?php echo($todo['done']); ?>" />
+        <input type="text" min="1" id="description" name="form[description]" class="form-control" placeholder="Enter description" value="<?php echo(htmlentities($todo['description'])); ?>" />
+        <input type="hidden" id="done" name="form[done]" value="<?php echo(htmlentities($todo['done'])); ?>" />
       </div>
       <div class="form-group">
         <button type="submit" class="btn btn-primary">Submit</button>
